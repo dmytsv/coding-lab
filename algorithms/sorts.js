@@ -41,9 +41,7 @@ var rSort = arr => {
     buckets[i] = [];
   }
 
-  const refillArr = (target = []) => (
-    buckets.forEach((e, ind) => ((target = [...target, ...e]), (buckets[ind] = []))), target
-  );
+  const resetBuckets = () => buckets.forEach((e, ind) => (buckets[ind] = []));
 
   let haveNumbersToSort = true;
   let order = 1;
@@ -54,7 +52,8 @@ var rSort = arr => {
       buckInd && (haveNumbersToSort = true);
       buckets[buckInd].push(num);
     }
-    newArr = refillArr();
+    newArr = [].concat(...buckets);
+    resetBuckets();
     order++;
   }
   return newArr;
