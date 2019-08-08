@@ -13,7 +13,10 @@ var merge = (ar1, ar2) => {
 
 var mSort = arr => {
   if (arr.length < 2) return arr;
-  return merge(mSort(arr.splice(Math.floor(arr.length / 2))), mSort(arr));
+  const mid = Math.floor(arr.length / 2);
+  const left = arr.slice(0, mid);
+  const right = arr.slice(mid);
+  return merge(mSort(left), mSort(right));
 };
 
 /** Quick sort */
