@@ -134,6 +134,7 @@ class SinglyLinkedList {
     const previousNode = this.get(index - 1);
     const node = previousNode.next;
     previousNode.next = node.next;
+    node.next = null;
 
     return node;
   }
