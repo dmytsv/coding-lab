@@ -72,6 +72,7 @@ class DoublyLinkedList {
     this.length--;
     return first;
   }
+
   unshift(data) {
     const node = new Node(data);
 
@@ -88,15 +89,24 @@ class DoublyLinkedList {
     return this;
   }
 
-  // vvv continue here vvv
   get(index) {
     if (index < 0 || index >= this.length) return null;
 
-    let currentIndex = 0;
-    let currentNode = this.head;
+    let currentIndex, currentNode, step, direction;
+    if (this.length - index > index) {
+      currentIndex = 0;
+      currentNode = this.head;
+      step = 1;
+      direction = 'next';
+    } else {
+      currentIndex = this.length - 1;
+      currentNode = this.tail;
+      step = -1;
+      direction = 'prev';
+    }
     while (index !== currentIndex) {
-      currentNode = currentNode.next;
-      currentIndex++;
+      currentNode = currentNode[direction];
+      currentIndex += step;
     }
 
     return currentNode;
@@ -111,6 +121,7 @@ class DoublyLinkedList {
     return node;
   }
 
+  // vvv continue here vvv
   insert(index, data) {
     if (index < 0 || index > this.length) throw `Index ${index} does not exist.`;
     if (index === 0) return this.unshift(data);
@@ -121,7 +132,9 @@ class DoublyLinkedList {
     const nextNode = previousNode.next;
 
     previousNode.next = node;
+    node.prev = previousNode;
     node.next = nextNode;
+    nextNode.prev = node;
 
     this.length++;
     return this;
