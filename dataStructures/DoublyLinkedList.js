@@ -155,21 +155,21 @@ class DoublyLinkedList {
     return node;
   }
 
-  // vvv continue here vvv
   reverse() {
     if (!this.head) return null;
 
-    this.tail = this.head;
     let currentNode = this.head;
+    this.tail = currentNode;
     let previousNode = null;
 
     while (currentNode) {
-      const { next } = currentNode;
+      const { next: nextNode } = currentNode;
       currentNode.next = previousNode;
+      previousNode && (previousNode.prev = currentNode);
       previousNode = currentNode;
-      currentNode = next;
+      currentNode = nextNode;
     }
-
+    previousNode.prev = null;
     this.head = previousNode;
 
     return this;
