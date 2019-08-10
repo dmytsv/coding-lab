@@ -127,9 +127,9 @@ class SinglyLinkedList {
   }
 
   remove(index) {
-    if (index < 0 || index > this.length) throw `Index ${index} does not exist.`;
+    if (index < 0 || index >= this.length) throw `Index ${index} does not exist.`;
     if (index === 0) return this.shift();
-    if (index === this.length) return this.pop();
+    if (index === this.length - 1) return this.pop();
 
     const previousNode = this.get(index - 1);
     const node = previousNode.next;

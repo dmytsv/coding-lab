@@ -121,7 +121,6 @@ class DoublyLinkedList {
     return node;
   }
 
-  // vvv continue here vvv
   insert(index, data) {
     if (index < 0 || index > this.length) throw `Index ${index} does not exist.`;
     if (index === 0) return this.unshift(data);
@@ -141,17 +140,22 @@ class DoublyLinkedList {
   }
 
   remove(index) {
-    if (index < 0 || index > this.length) throw `Index ${index} does not exist.`;
+    if (index < 0 || index >= this.length) throw `Index ${index} does not exist.`;
     if (index === 0) return this.shift();
-    if (index === this.length) return this.pop();
+    if (index === this.length - 1) return this.pop();
 
-    const previousNode = this.get(index - 1);
-    const node = previousNode.next;
-    previousNode.next = node.next;
+    const node = this.get(index);
+    const previousNode = node.prev;
+    const nextNode = node.next;
+    previousNode.next = nextNode;
+    nextNode.prev = previousNode;
+    node.prev = null;
+    node.next = null;
 
     return node;
   }
 
+  // vvv continue here vvv
   reverse() {
     if (!this.head) return null;
 
