@@ -11,7 +11,7 @@ class BinarySearchTree {
     this.root = null;
   }
 
-  // Anabling [...bst] and {...bst} syntax
+  // Enabling [...bst] and {...bst} syntax
   *[Symbol.iterator]() {
     function* buildTree(node) {
       if (!node) return;
