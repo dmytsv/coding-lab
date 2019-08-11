@@ -64,11 +64,11 @@ class SinglyLinkedList {
     if (first === this.tail) {
       this.head = null;
       this.tail = null;
-      this.length = 0;
-      return first;
+    } else {
+      this.head = first.next;
+      first.next = null;
     }
-    this.head = first.next;
-    first.next = null;
+
     this.length--;
     return first;
   }
