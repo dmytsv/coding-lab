@@ -53,5 +53,11 @@ var makeGraph = N => {
     graph.push(stringBuilder.join(''));
     if (i === 0) graph.push(time.join(''));
   }
-  for (const s of graph) console.log(s);
+  for (const s of graph) console.log('%c%s', `color: ${
+   (num => isNaN(num) 
+    ? 'LightGray' 
+    : num < 0
+    ? 'LightSalmon'
+    : 'Chartreuse')(parseInt(s))
+  }`,s);
 };
