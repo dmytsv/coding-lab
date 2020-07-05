@@ -11,13 +11,13 @@
  */
 var makeGraph = N => {
   const r = () => Math.random();
-  const PROB = 0.3;
+  const LOSS_PROB = 0.3;
   const BET = 10;
 
   const data = [0];
   const time = [];
   for (let i = 1; i < N; i++) {
-    const win = r() > PROB;
+    const win = r() > LOSS_PROB;
     if (win) {
       data[i] = data[i - 1] + BET;
     } else {
