@@ -1,13 +1,13 @@
 /**
  * Builds growth graph based on provided probability and value
  * makeGraph(10)
- *  40 |         x 
+ *  40 |         x
  *  30 |        x x
- *  20 |       x   
- *  10 |    x x    
- *   0 | x x x     
+ *  20 |       x
+ *  10 |    x x
+ *   0 | x x x
  * ---------------
- * -10 |  x         
+ * -10 |  x
  */
 var makeGraph = N => {
   const r = () => Math.random();
@@ -41,10 +41,10 @@ var makeGraph = N => {
   const graph = [];
   const maxEntryLength = Math.max(`${max} | `.length, `${min} | `.length);
   time.push('-'.repeat(maxEntryLength));
-  for (let i = max; i >= min; i -= 10) {
+  for (let i = max; i >= min; i -= BET) {
     const stringBuilder = [`${i} | `.padStart(maxEntryLength, ' ')];
     for (let j = 0; j < data.length; j++) {
-      if (graphCache[i][j]) {
+      if (graphCache[i]?.[j]) {
         stringBuilder.push('x');
       } else {
         stringBuilder.push(' ');
@@ -53,11 +53,13 @@ var makeGraph = N => {
     graph.push(stringBuilder.join(''));
     if (i === 0) graph.push(time.join(''));
   }
-  for (const s of graph) console.log('%c%s', `color: ${
-   (num => isNaN(num) 
-    ? 'LightGray' 
-    : num < 0
-    ? 'LightSalmon'
-    : 'Chartreuse')(parseInt(s))
-  }`,s);
+  for (const s of graph)
+    console.log(
+      '%c%s',
+      `color: ${(num =>
+        isNaN(num) ? 'LightGray' : num < 0 ? 'LightSalmon' : 'Chartreuse')(
+        parseInt(s)
+      )}`,
+      s
+    );
 };
