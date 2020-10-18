@@ -3,7 +3,7 @@
  * pattern matching O(n) time
  * @param { String } pattern
  * @param { String } str
- * @return { Number } index of match or -1
+ * @returns { Number } index of match or -1
  */
 function kmp(str, pattern) {
   if (!str || !pattern) return -1;
