@@ -14,7 +14,13 @@ def boyer_moore_horspool(text, pattern):
       0
       >>> boyer_moore_horspool('abcabc', 'abc')
       0
+      >>> boyer_moore_horspool('aaabababb', 'ababa')
+      2
+      >>> boyer_moore_horspool('hgfbaidaidai', 'baidai')
+      3
       >>> boyer_moore_horspool('aaabbcabc', 'abc')
+      6
+      >>> boyer_moore_horspool('hgfcaibaidai', 'baidai')
       6
       >>> boyer_moore_horspool('aaaaaaaabaab', 'aab')
       6
@@ -29,18 +35,16 @@ def boyer_moore_horspool(text, pattern):
     for i in range(m-1):
         skip[ord(pattern[i])] = m - i - 1
 
-    if skip[ord(pattern[m-1])] < m:
-        skip[ord(pattern[m-1])] = 1
-
-    for i in range(m-1, n):
-        k = i
+    i = 0
+    while n - i >= m:
         j = m-1
-        while (text[k] == pattern[j]):
+
+        while (text[i+j] == pattern[j]):
             if j == 0:
-                return k
+                return i
             j -= 1
-            k -= 1
-        i += skip[ord(pattern[j])]
+
+        i += skip[ord(text[i+m-1])]
 
     return -1
 
