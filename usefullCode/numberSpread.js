@@ -6,11 +6,11 @@
 // for (let i of 10) { *** some code *** }
 
 Number.prototype[Symbol.iterator] = function*() {
-  if (!Number.isInteger(+this)) throw "Number should be an integer.";
+  const num = Number(this);
+  if (!Number.isInteger(num)) throw "Number should be an integer.";
 
-  let [i, end] = this >= 0 ? [0, +this] : [+this, 0];
+  let [i, end] = num >= 0 ? [0, num] : [num, 0];
 
-  for (; i <= end; i++) {
-    yield i;
-  }
+  while (i <= end) yield i++;
+
 };
